@@ -29,9 +29,40 @@ class EstadoController extends Controller
 
     public function inserir(EstadoRequest $request){
 
-        Estado::create($request->all());
+        $inserido_confirmacao = Estado::create($request->all());
 
-        return Redirect::route('estado.index')->with('success', 'Estado criado com sucesso.');
+        if($inserido_confirmacao){
+            return Redirect::route('estado.index')->with('insercao', [
+                'success'   => true,
+                'message'   => 'Estado inserido com sucesso.'
+            ]);
+        } else{
+            return Redirect::route('estado.index')->with('insercao', [
+                'success'   => false,
+                'message'   => 'Estado não pode ser inserido.'
+            ]);
+        }
+    }
+
+    public function alterar($id, Request $request){
+
+    }
+    
+    public function excluir($id){
+        $estado = Estado::find(intval($id));
+        $excluido_confirmacao = $estado->delete();
+
+        if($excluido_confirmacao){
+            return redirect()->back()->with('exclusao', [
+                'success'   => true,
+                'message'   => 'O Estado ' . $estado->nome . ' foi excluído com sucesso.'
+            ]);
+        } else{
+            return redirect()->back()->with('exclusao', [
+                'success'   => false,
+                'message'   => 'O Estado ' . $estado->nome . ' não pode ser excluído.'
+            ]);
+        }
 
     }
 }

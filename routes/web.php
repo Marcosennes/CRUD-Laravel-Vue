@@ -24,14 +24,16 @@ Route::controller(EstadoController::class)->group(function(){
     Route::get('/estado/listar', 'index')->name('estado.index');
     Route::get('/estado/inserir', 'inserirIndex')->name('estado.inserir.index');
     Route::post('/estado/inserir', 'inserir')->name('estado.inserir');
-    Route::post('/estado/alterar', 'alterar')->name('estado.alterar');
-    Route::post('/estado/excluir', 'excluir')->name('estado.excluir');
+    Route::get('/estado/alterar', 'alterarIndex')->name('estado.alterar.index');
+    Route::put('/estado/alterar', 'alterar')->name('estado.alterar');
+    Route::delete('/estado/excluir/{id}', 'excluir')->name('estado.excluir');
 });
 
 Route::controller(CidadeController::class)->group(function(){
     Route::get('/cidade/listar', 'index')->name('cidade.index');
     Route::get('/cidade/inserir', 'inserirIndex')->name('cidade.inserir.index');
     Route::post('/cidade/inserir', 'inserir')->name('cidade.inserir');
-    Route::post('/cidade/alterar', 'alterar')->name('cidade.alterar');
+    Route::get('/cidade/alterar', 'alterarIndex')->name('cidade.alterar.index');
+    Route::put('/cidade/alterar', 'alterar')->name('cidade.alterar');
     Route::post('/cidade/excluir', 'excluir')->name('cidade.excluir');
 });
